@@ -9,6 +9,46 @@
   </head>
 
   <body>
-    <%= yield %>
+  	<!-- dropdown content -->
+  	<% if user_signed_in? %>
+ 	  	<ul id="dropdown1" class="dropdown-content">
+	  		<li><%= link_to "Edit Profile", edit_user_registration_path %></li>
+	  		<li><%= link_to "Manage Ships", user_boats_path(current_user) %></li>
+	  		<li><%= link_to "Manage Jobs", user_jobs_path(current_user) %></li>
+	  		<li class="divider"></li>
+	  		<li><%= link_to "Logout", destroy_user_session_path, method: :delete %></li>
+			</ul>
+		<% end %>
+
+		<div class="container">
+
+	  	<nav>
+	    	<div class="nav-wrapper blue darken-3">
+	      	<%= link_to "Shipshopped", root_path, :class => "brand-logo" %>
+	      	<ul id="nav-mobile" class="right hide-on-med-and-down">
+	      		<% if user_signed_in? %>
+	      			<li><%= link_to "Add Ship", new_user_boat_path(current_user) %></li>
+	      			<li><%= link_to "Post New Job", new_user_job_path(current_user) %></li>
+	      			<li><strong><%= link_to current_user.username, current_user, :class => 'black-text' %></strong></li>
+	      			<li><a class="dropdown-button" href="#!" data-activates="dropdown1">Profile Options</a></li>
+	      		<% else %>
+		        	<li><%= link_to "Login", new_user_session_path %></li>
+		        	<li><%= link_to "Create Account", new_user_registration_path %></li>
+						<% end %>	   	      
+	      	</ul>
+	    	</div>
+	  	</nav>
+	  	
+  		<div class="row">	
+  			<div class="col s3" id="">
+  				test
+  			</div>
+  			<div class="col s9">
+    			<%= yield %>
+    		</div>
+    	</div> <!--ends row-->
+
+  	</div> <!--ends container -->
   </body>
 </html>
+
