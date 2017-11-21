@@ -1,0 +1,37 @@
+<% if @job.errors.full_messages.any? %>
+	<ul>
+		<% @job.errors.full_messages.each do |error| %>
+			<li><%= error %></li>
+		<% end %>
+	</ul>
+<% end %>
+
+<% if flash[:alert] %>
+	<h5 style="color: red;"><%= flash[:alert] %></h5>
+<% end %>
+
+<%= form_with model: @job, local: true do |f| %>
+	<%= f.hidden_field :user_id, value: current_user.id %>
+	<%= f.text_field :job_name, placeholder: 'Job Name' %>
+	<%= f.text_field :description, placeholder: 'Job Description', minlength: 50 %>
+	<%= f.text_field :containers, placeholder: 'Containers' %>
+	<%= f.text_field :cost, placeholder: "Cost" %>
+
+	<%= f.select(:origin) do %>
+  	<option value="" disabled selected>Origin</option>
+  	
+		<% LOCATIONS.each do |loc| %>
+			<option value="<%= loc %>"><%= loc %></option>
+   	<% end %>
+  <% end %>
+
+  <%= f.select(:destination) do %>
+  	<option value="" disabled selected>Destination</option>
+  	
+		<% LOCATIONS.each do |loc| %>
+			<option value="<%= loc %>"><%= loc %></option>
+   	<% end %>
+  <% end %>
+	<%= f.submit "Post New Job", :class => "btn waves-effect waves-light blue darken-3" %>
+	
+<% end %>

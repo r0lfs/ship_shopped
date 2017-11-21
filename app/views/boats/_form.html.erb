@@ -6,17 +6,19 @@
 	</ul>
 <% end %>
 
-<%= form_with model: @boat, local: true do |f| %>
+<%= form_with model: @boat, url: boats_path, html: { multipart: true },  local: true do |f| %>
 <%= f.hidden_field :user_id, value: current_user.id %>
 	<%= f.text_field :ship_name, placeholder: 'Ship Name' %>
 	<%= f.text_field :containers, placeholder: 'Containers' %>
+	<%= f.label :avatar, "What the Ship?" %> <br>
+	<%= f.file_field :avatar %>
 
 
 	<%= f.select(:location) do %>
   	<option value="" disabled selected>Ship's Current Location</option>
   	
-		<% [['Lisbon'], ['Madrid']].each do |c| %>
-			<option value="<%= c.first %>"><%= c.first %></option>
+		<% LOCATIONS.each do |location| %>
+			<option value="<%= location %>"><%= location %></option>
    	<% end %>
   <% end %>
 	<%= f.submit "Add Ship To Inventory", :class => "btn waves-effect waves-light blue darken-3" %>
