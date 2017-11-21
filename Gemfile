@@ -39,7 +39,7 @@ gem 'material_icons'
 gem 'jquery-rails', '~> 4.3', '>= 4.3.1'
 gem 'jquery-ui-rails'
 
-gem 'paperclip'
+gem "paperclip", "~> 5.1.0"
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 

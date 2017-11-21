@@ -17,6 +17,26 @@
 @import "materialize";
 
 
-#currentUserLink{
-	color: red;
+.job{
+	width: 50%;
+	border-size: box-sizing;
+	border: solid 1px black;
+	margin-top: 1%;
+	padding: 0 2%;
+}
+
+.boat{
+	border-size: box-sizing;
+	width: 50%;
+	border: solid 1px black;
+	margin-top: 1%;
+	padding-left: 5%;
+}
+
+.user{
+
+	border: solid 1px black;
+	padding-left: 2%;
+	margin-top: 1%;
+
 }

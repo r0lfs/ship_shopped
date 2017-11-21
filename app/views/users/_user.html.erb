@@ -1,0 +1,18 @@
+<div class="user">
+	<div class="username">
+		<h3><%= link_to user.username, user %></h3>
+	</div>
+	<div class="profile-pic">
+		<% if user.avatar? %>
+			<%= image_tag user.avatar.url(:thumb) %>
+		<% end %>
+	</div>
+	<div class="information">
+		<ul>
+			<li><b>Name: </b><%= user.first_name %> <%= user.last_name %></li>
+			<li><b>Company: </b><%= user.company %></li>
+			<li><b>Ships in Fleet: </b><%= user.boats.count %></li>
+			<li><b>Current Jobs: </b><%= user.jobs.count %></li>
+		</ul>
+	</div>
+</div>

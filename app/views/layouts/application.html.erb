@@ -13,7 +13,7 @@
   	<% if user_signed_in? %>
  	  	<ul id="dropdown1" class="dropdown-content">
 	  		<li><%= link_to "Edit Profile", edit_user_registration_path %></li>
-	  		<li><%= link_to "Manage Ships", user_boats_path(current_user) %></li>
+	  		<li><%= link_to "Manage Ships", boats_path %></li>
 	  		<li><%= link_to "Manage Jobs", user_jobs_path(current_user) %></li>
 	  		<li class="divider"></li>
 	  		<li><%= link_to "Logout", destroy_user_session_path, method: :delete %></li>
@@ -40,10 +40,12 @@
 	  	</nav>
 	  	
   		<div class="row">	
-  			<div class="col s3" id="">
-  				test
+  			<div class="col s2" id="">
+  				<% if current_user %>
+	  				<%= render 'users/user', user:current_user %>
+  				<% end %>
   			</div>
-  			<div class="col s9">
+  			<div class="col s10">
     			<%= yield %>
     		</div>
     	</div> <!--ends row-->
