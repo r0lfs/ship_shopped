@@ -1,0 +1,10 @@
+<% form_with model: @contract, local: true do |f| %>
+	<%= f.hidden_field :job_id, :value => job.id %>
+	<%= f.select(:boat_id) do %>
+  	<option value="" disabled selected>Ships</option>
+  	
+		<% @boats.where(location: job.origin).each do |boat| %>
+			<option value="<%= boat.id %>"><%= boat.ship_name %></option>
+   	<% end %>
+  <% end %>
+<% end %>

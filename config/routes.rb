@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
   
+  get 'contracts/create'
+
+  get 'contracts/destroy'
+
   devise_for :users, controllers: {
         registrations: 'users/registrations'
       }
@@ -13,6 +17,8 @@ Rails.application.routes.draw do
 
 	resources :boats
 	resources :jobs
+  resources :contracts, only: [:create, :destroy]
+
   root 'home#index'
   
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
