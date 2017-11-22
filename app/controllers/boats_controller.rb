@@ -1,7 +1,8 @@
 class BoatsController < ApplicationController
 
   def index
-    @boats = current_user.boats.all
+    @boats = current_user.boats.all.reverse
+    @boat = Boat.new
   end
 
   def new
@@ -9,11 +10,14 @@ class BoatsController < ApplicationController
   end
 
   def create
-    @boat = Boat.new(boat_params)
-    if @boat.save
-      redirect_to root_path      
-    else
-      render 'new'
+    respond_to do |format|
+      @boat = Boat.new(boat_params)
+      if @boat.save
+        format.js 
+        format.html {redirect_to boats_path}
+      else
+        format.html {render 'new'}
+      end
     end
   end
 

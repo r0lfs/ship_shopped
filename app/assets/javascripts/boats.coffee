@@ -3,3 +3,5 @@
 # You can use CoffeeScript in this file: http://coffeescript.org/
 $(document).on 'turbolinks:load',->
 	$('select').material_select()
+	$('.destroy_boat').on 'ajax:success', ->
+		$(this).closest('.boat').remove()

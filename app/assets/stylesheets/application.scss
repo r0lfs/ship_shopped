@@ -16,13 +16,28 @@
  */
 @import "materialize";
 
+body{
+	background: ghostwhite;
+}
 
 .job{
-	width: 50%;
+	width: 80%;
 	border-size: box-sizing;
 	border: solid 1px black;
 	margin-top: 1%;
 	padding: 0 2%;
+
+	.edit{
+		float: right;
+	}
+	
+
+	button{
+		margin-bottom: 1%;
+	}
+	.bid{
+		margin-bottom: 1%;
+	}
 }
 
 .boat{
