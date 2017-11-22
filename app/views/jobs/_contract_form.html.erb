@@ -1,10 +1,14 @@
-<% form_with model: @contract, local: true do |f| %>
+<%= form_with model: @contract, url: contracts_path, scope: 'contract',  local: true do |f| %>
 	<%= f.hidden_field :job_id, :value => job.id %>
 	<%= f.select(:boat_id) do %>
   	<option value="" disabled selected>Ships</option>
   	
 		<% @boats.where(location: job.origin).each do |boat| %>
-			<option value="<%= boat.id %>"><%= boat.ship_name %></option>
+			<% if !@contracted.where(boat_id: boat.id).exists? %>
+				<option value="<%= boat.id %>"><%= boat.ship_name %></option>
+			<% end %>
    	<% end %>
   <% end %>
+	<%= f.submit "Assign Boat", :class => "btn waves-effect waves-light blue darken-3" %>
+
 <% end %>
