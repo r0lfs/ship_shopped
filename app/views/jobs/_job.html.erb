@@ -17,4 +17,45 @@
 			<li><b>Destination: </b><%= job.destination %></li>
 		</ul>
 	</div>
+	<div class="current_ships">
+		<b>Ships Currently Contracted for this Job: </b>
+		<ul>
+			<% @contracted.where(job_id: job.id).each do |ships| %>
+				<% if @all_boats.where(id: ships.boat_id).exists? %>
+					<li><%= @all_boats.find_by(id: ships.boat_id).ship_name %></li>
+				<% end %>
+			<% end %>
+		</ul>
+	</div>
+	<div class="bid">
+		<% if @boats.where(location: job.origin).exists? %>
+			
+			<%= form_with model: @contract, url: contracts_path, scope: 'contract',  local: true do |f| %>
+				<%= f.hidden_field :job_id, :value => job.id %>
+				<%= f.select(:boat_id) do %>
+			  	<option value="" disabled selected>Ships</option>
+			  	
+					<% @boats.where(location: job.origin).each do |boat| %>
+						<% if !@contracted.where(boat_id: boat.id).exists? %>
+							<option value="<%= boat.id %>"><%= boat.ship_name %></option>
+						<% end %>
+			   	<% end %>
+			  <% end %>
+		  	<%= f.submit "Assign Boat", :class => "btn waves-effect waves-light blue darken-3" %>
+
+			<% end %>
+		<% end %>
+	</div>
+	<% if job.user.id == current_user.id %>
+		
+		<button>
+			<%= link_to "Cancel Job", job, method: :delete %>
+		</button>
+	<% end %>
 </div>
+
+
+<% @contracted.each do |con| %>
+	<%= con.job_id %> <br>
+	<%= con.boat_id %> <br>
+<% end %>

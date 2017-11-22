@@ -56,4 +56,6 @@ cancel_user_registration GET    /users/cancel(.:format)             users/regist
                          PATCH  /jobs/:id(.:format)                 jobs#update
                          PUT    /jobs/:id(.:format)                 jobs#update
                          DELETE /jobs/:id(.:format)                 jobs#destroy
+               contracts POST   /contracts(.:format)                contracts#create
+                contract DELETE /contracts/:id(.:format)            contracts#destroy
                     root GET    /                                   home#index

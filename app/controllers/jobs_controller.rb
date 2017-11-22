@@ -1,6 +1,10 @@
 class JobsController < ApplicationController
   def index
     @jobs = Job.all.reverse
+    @boats = current_user.boats.all
+    @all_boats = Boat.all
+    @contracted = Contract.all
+    p params
   end
 
   def new

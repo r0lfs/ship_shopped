@@ -8,9 +8,9 @@
 	<% end %>
 	<div class="description">
 			<ul>
-				<li><strong>Current Location:</strong> <br>
+				<li><b>Current Location:</b> <br>
 				<%= boat.location  %></li>
-				<li><strong>Capacity: </strong><%= boat.containers %> Containers</li>
+				<li><b>Capacity: </b><%= boat.containers %> Containers</li>
 			</ul>
 	</div>
 	<% if boat.user.id == current_user.id %>
