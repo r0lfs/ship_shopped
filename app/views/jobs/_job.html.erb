@@ -29,21 +29,7 @@
 	</div>
 	<div class="bid">
 		<% if @boats.where(location: job.origin).exists? %>
-			
-			<%= form_with model: @contract, url: contracts_path, scope: 'contract',  local: true do |f| %>
-				<%= f.hidden_field :job_id, :value => job.id %>
-				<%= f.select(:boat_id) do %>
-			  	<option value="" disabled selected>Ships</option>
-			  	
-					<% @boats.where(location: job.origin).each do |boat| %>
-						<% if !@contracted.where(boat_id: boat.id).exists? %>
-							<option value="<%= boat.id %>"><%= boat.ship_name %></option>
-						<% end %>
-			   	<% end %>
-			  <% end %>
-		  	<%= f.submit "Assign Boat", :class => "btn waves-effect waves-light blue darken-3" %>
-
-			<% end %>
+			<%= render :partial => 'jobs/contract_form', locals: {job: job} %>
 		<% end %>
 	</div>
 	<% if job.user.id == current_user.id %>
@@ -52,10 +38,6 @@
 			<%= link_to "Cancel Job", job, method: :delete %>
 		</button>
 	<% end %>
+
 </div>
 
-
-<% @contracted.each do |con| %>
-	<%= con.job_id %> <br>
-	<%= con.boat_id %> <br>
-<% end %>

@@ -1,6 +1,7 @@
 class Job < ApplicationRecord
 	belongs_to :user
 	has_many :boats, through: :contracts
+	accepts_nested_attributes_for :boats
 
 	validates :job_name, presence: true, uniqueness: true
 	validates :description, presence: true, length: {minimum: 50}
