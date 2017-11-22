@@ -1,9 +1,15 @@
-<div class="job">
+<div class="job card grey lighten-4 z-depth-3">
+	<% if job.user.id == current_user.id %>
+		<div class="edit">
+			<%= link_to '<i class="tiny material-icons">edit</i>'.html_safe, edit_job_path(job) %>
+		</div>
+	<% end %>
+
 	<div class="title">
-		<p><b> Title: </b> <br>
-			<%= job.job_name %>
-		</p>
+		<b> Title: </b> <br>
+		<%= job.job_name %>
 	</div>
+		
 	<div class="description">
 		<p><b>Details: </b> <br>
 			<%= job.description %>
