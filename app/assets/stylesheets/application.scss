@@ -42,16 +42,20 @@ body{
 
 .boat{
 	border-size: box-sizing;
-	width: 50%;
+	width: 80%;
 	border: solid 1px black;
 	margin-top: 1%;
 	padding-left: 5%;
+	.edit{
+		float: right;
+	}
 }
 
 .user{
-
+	width: 80%;
 	border: solid 1px black;
 	padding-left: 2%;
 	margin-top: 1%;
+	border-size: box-sizing;
 
 }

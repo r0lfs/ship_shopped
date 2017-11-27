@@ -1,4 +1,9 @@
-<div class="boat">
+<div class="boat card blue-grey lighten-5 z-depth-3">
+	<% if boat.user.id == current_user.id %>
+		<div class="edit">
+			<%= link_to '<i class="tiny material-icons">edit</i>'.html_safe, edit_boat_path(boat) %>
+		</div>
+	<% end %>
 	<div class="title">
 		<b> Ship Name: </b> <br>
 			<%= boat.ship_name %>
@@ -8,6 +13,9 @@
 	<% end %>
 	<div class="description">
 			<ul>
+				<li><b>Ship's Owner:</b> <br>
+					<%= link_to boat.user.username, user_path(boat.user) %>
+				</li>
 				<li><b>Current Location:</b> <br>
 				<%= boat.location  %></li>
 				<li><b>Capacity: </b><%= boat.containers %> Containers</li>

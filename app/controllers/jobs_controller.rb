@@ -1,5 +1,10 @@
 class JobsController < ApplicationController
   def index
+    @user = User.find_by(id: params[:user_id])
+    if @user
+      @user_jobs = @user.jobs.all.reverse
+    end
+    @job = Job.new
     @jobs = Job.all.reverse
     @boats = current_user.boats.all
     @all_boats = Boat.all
@@ -28,12 +33,24 @@ class JobsController < ApplicationController
   end
 
   def edit
+    @job = Job.find_by(id: params[:id])
   end
 
   def update
+     @job = Job.find_by(id: params[:id])
+    if @job.update(job_params)
+      redirect_to jobs_path
+    else
+      render 'edit'
+    end
   end
 
   def destroy
+    respond_to do |format|
+      Job.find(params[:id]).destroy
+      format.js
+      format.html {redirect_to jobs_path}
+    end
   end
 
   private

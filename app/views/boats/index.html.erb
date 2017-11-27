@@ -1,12 +1,25 @@
-<h1>Boats#index</h1>
-<a class="waves-effect waves-light btn" id='boat-click' href="" onclick="$('#new-boat').toggle(); event.preventDefault()">Add New Ship to Fleet</a>
-<div id="new-boat">
+<% if !@user %>
+	<a class="waves-effect waves-light btn blue-grey darken-3" id='new-boat-button' href="" onclick="$('#new-boat').toggle(); event.preventDefault()">Add New Ship to Fleet</a>	
+	<div id="new-boat">
  	<%= render 'boats/form' %>
 </div>
+<% end %>
 
-<div class="boats">
-	<% @boats.each do |boat| %>
-		<%= render boat %>
-	<% end %>
-</div>
+<% if @user %>
+	<h5><%= @user.username %>'s Boats:</h5>
+	<div class="boats">
+		<% @user_boats.each do |boat| %>
+			<%= render boat %>
+		<% end %>
+	</div>
+<% else %>
+	<div class="boats">
+		<% @boats.each do |boat| %>
+			<%= render boat %>
+		<% end %>
+	</div>
+<% end %>
+
+
+
 

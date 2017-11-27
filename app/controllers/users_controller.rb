@@ -7,6 +7,6 @@ class UsersController < ApplicationController
   	@user = User.find_by(id: params[:id])
   	@contracted = Contract.all
     @boats = current_user.boats.all
-
+    @all_boats = Boat.all
   end
 end

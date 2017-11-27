@@ -1,5 +1,27 @@
-<div class="jobs">
-	<% @jobs.each do |job| %>
-		<%= render job %>
-	<% end %>
-</div>
+<% if !@user %>
+	
+	<a class="waves-effect waves-light btn blue-grey darken-3" id='new-job-button' href="" onclick="$('#new-job').toggle(); event.preventDefault()">Submit New Job Request
+	</a>
+	<div id="new-job">
+	 	<%= render 'jobs/form' %>
+	</div>
+
+<% end %>
+
+<% if @user %>
+		
+	<div class="jobs">
+		<% @user_jobs.each do |job| %>
+			<%= render job %>
+		<% end %>
+	</div>
+
+<% else %>
+
+	<div class="jobs">
+		<% @jobs.each do |job| %>
+			<%= render job %>
+		<% end %>
+	</div>
+
+<% end %>
