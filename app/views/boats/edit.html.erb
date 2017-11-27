@@ -1,2 +1,27 @@
 <h1>Boats#edit</h1>
-<p>Find me in app/views/boats/edit.html.erb</p>
+<% if @boat.errors.full_messages.any? %>
+	<ul>
+		<% @boat.errors.full_messages.each do |error| %>
+			<li><%= error %></li>
+		<% end %>
+	</ul>
+<% end %>
+
+<%= form_with model: @boat, html: { multipart: true, remote: true }, local: true do |f| %>
+<%= f.hidden_field :user_id, value: current_user.id %>
+	<%= f.text_field :ship_name, placeholder: 'Ship Name' %>
+	<%= f.text_field :containers, placeholder: 'Containers' %>
+	<%= f.label :avatar, "What the Ship?" %> <br>
+	<%= f.file_field :avatar %>
+
+
+	<%= f.select(:location) do %>
+  	<option value="" disabled selected>Ship's Current Location</option>
+  	
+		<% LOCATIONS.each do |location| %>
+			<option value="<%= location %>"><%= location %></option>
+   	<% end %>
+  <% end %>
+	<%= f.button "Add Ship To Fleet", :class => "btn waves-effect waves-light blue darken-3", remote: true %>
+	
+<% end %>

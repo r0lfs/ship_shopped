@@ -1,4 +1,4 @@
-<div class="job card grey lighten-4 z-depth-3">
+<div class="job card blue-grey lighten-5 z-depth-3">
 	<% if job.user.id == current_user.id %>
 		<div class="edit">
 			<%= link_to '<i class="tiny material-icons">edit</i>'.html_safe, edit_job_path(job) %>
@@ -17,6 +17,9 @@
 	</div>
 	<div class="details">
 		<ul>
+			<li><b>Contract Offer From:</b><br>
+				<%= link_to job.user.username, user_path(job.user) %>
+			</li>
 			<li><b>Cost: </b><%= job.cost %></li>
 			<li><b>Containers Required: </b><%= job.containers %></li>
 			<li><b>Origin: </b><%= job.origin %></li>

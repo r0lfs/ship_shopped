@@ -15,8 +15,9 @@
   	<!-- dropdown content -->
   	<% if user_signed_in? %>
  	  	<ul id="dropdown1" class="dropdown-content">
+ 	  		<li><%= link_to "View Profile", user_path(current_user) %></li>
 	  		<li><%= link_to "Edit Profile", edit_user_registration_path %></li>
-	  		<li><%= link_to "Manage Ships", boats_path %></li>
+	  		<li><%= link_to "Manage Ships", user_boats_path(current_user) %></li>
 	  		<li><%= link_to "Manage Jobs", user_jobs_path(current_user) %></li>
 	  		<li class="divider"></li>
 	  		<li><%= link_to "Logout", destroy_user_session_path, method: :delete %></li>
@@ -26,14 +27,17 @@
 		<div class="container">
 
 	  	<nav>
-	    	<div class="nav-wrapper blue darken-3">
+	    	<div class="nav-wrapper blue-grey darken-2">
 	      	<%= link_to "Shipshopped", root_path, :class => "brand-logo" %>
 	      	<ul id="nav-mobile" class="right hide-on-med-and-down">
 	      		<% if user_signed_in? %>
+	      			<li><%= link_to "All Jobs", jobs_path %></li>
+	      			<li><%= link_to "All Ships", boats_path %></li>
 	      			<li><%= link_to "Add Ship", new_user_boat_path(current_user) %></li>
 	      			<li><%= link_to "Post New Job", new_user_job_path(current_user) %></li>
-	      			<li><strong><%= link_to current_user.username, current_user, :class => 'black-text' %></strong></li>
-	      			<li><a class="dropdown-button" href="#!" data-activates="dropdown1">Profile Options</a></li>
+	      			<li><a class="dropdown-button" href="#!" data-activates="dropdown1"><%= current_user.username %>
+	      				<i class="material-icons right">arrow_drop_down</i></a>
+	      			</li>
 	      		<% else %>
 		        	<li><%= link_to "Login", new_user_session_path %></li>
 		        	<li><%= link_to "Create Account", new_user_registration_path %></li>

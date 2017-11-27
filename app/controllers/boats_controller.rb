@@ -1,7 +1,11 @@
 class BoatsController < ApplicationController
 
   def index
-    @boats = current_user.boats.all.reverse
+    @user = User.find_by(id: params[:user_id])
+    if @user
+      @user_boats = @user.boats.all.reverse
+    end
+    @boats = Boat.all.reverse
     @boat = Boat.new
   end
 
@@ -26,9 +30,16 @@ class BoatsController < ApplicationController
   end
 
   def edit
+    @boat = Boat.find_by(id: params[:id])
   end
 
   def update
+    @boat = Boat.find_by(id: params[:id])
+    if @boat.update(boat_params)
+      redirect_to boats_path
+    else
+      render 'edit'
+    end
   end
 
   def destroy

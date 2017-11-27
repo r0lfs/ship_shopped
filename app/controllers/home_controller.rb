@@ -3,7 +3,7 @@ class HomeController < ApplicationController
   	if !user_signed_in?
   		redirect_to new_user_session_path
   	else
-  		@jobs = Job.all
+  		redirect_to jobs_path
   	end
   end
 end
