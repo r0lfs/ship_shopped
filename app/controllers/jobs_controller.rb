@@ -1,4 +1,5 @@
 class JobsController < ApplicationController
+
   def index
     @user = User.find_by(id: params[:user_id])
     if @user
@@ -47,7 +48,15 @@ class JobsController < ApplicationController
 
   def destroy
     respond_to do |format|
-      Job.find(params[:id]).destroy
+      @job = Job.find(params[:id])
+      if Contract.where(job_id: @job.id).exists?
+        @contracts = Contract.where(job_id: @job.id).all
+        @contracts.each do |contract|
+          Boat.find_by(id: contract.boat_id).update(under_contract: false)
+          contract.destroy
+        end
+      end
+      @job.destroy
       format.js
       format.html {redirect_to jobs_path}
     end

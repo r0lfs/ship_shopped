@@ -44,7 +44,11 @@ class BoatsController < ApplicationController
 
   def destroy
     respond_to do |format|
-      Boat.find(params[:id]).destroy
+      @boat = Boat.find(params[:id])
+      if Contract.where(boat_id: @boat.id).exists?
+        Contract.find_by(boat_id: @boat.id).destroy
+      end
+      @boat.destroy
       format.js
       format.html {redirect_to boats_path}
     end
@@ -53,6 +57,8 @@ class BoatsController < ApplicationController
   private
 
   def boat_params
-    params.require(:boat).permit(:user_id, :location, :containers, :ship_name, :avatar)
+    params.require(:boat).permit(:user_id, :location, :containers, :ship_name, :avatar, :under_contract)
   end
+
+  
 end
