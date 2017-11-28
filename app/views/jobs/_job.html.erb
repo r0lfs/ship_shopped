@@ -21,6 +21,7 @@
 			<li><b>Contract Offer From:</b><br>
 				<%= link_to job.user.username, user_path(job.user) %>
 			</li>
+			<br>
 			<li><b>Cost: </b><%= job.cost %></li>
 			<li><b>Total Containers Required: </b><%= job.containers %></li>
 			<li><b>Origin: </b><%= job.origin %></li>
@@ -28,7 +29,7 @@
 		</ul>
 	</div>
 
-	<div class="current_ships">
+	<div class="current_ships<%= job.id %>">
 		<% if @contracted.where(job_id: job.id).exists? %>
 		<% @contracts = @contracted.where(job_id: job.id).all %>
 			<b>Ships Currently Contracted for this Job: </b>
