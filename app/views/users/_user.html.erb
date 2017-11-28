@@ -11,8 +11,20 @@
 		<ul>
 			<li><b>Name: </b><%= user.first_name %> <%= user.last_name %></li>
 			<li><b>Company: </b><%= user.company %></li>
-			<li><b>Ships in Fleet: </b><%= user.boats.count %></li>
-			<li><b>Current Jobs: </b><%= user.jobs.count %></li>
+			<li><b>Ships in Fleet: </b>
+				<% if user.boats.count > 0 %>
+					<%= link_to user.boats.count, user_boats_path(user) %>
+				<% else %>
+					<%= user.boats.count %>
+				<% end %>
+			</li>
+			<li><b>Current Jobs: </b>
+				<% if user.jobs.count > 0 %>
+					<%= link_to user.jobs.count, user_jobs_path(user) %>
+				<% else %>
+					<%= user.jobs.count %>
+				<% end %>
+			</li>
 		</ul>
 	</div>
 </div>

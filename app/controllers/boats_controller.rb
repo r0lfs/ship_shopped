@@ -27,7 +27,7 @@ class BoatsController < ApplicationController
   end
 
   def show
-    @boats = User.find_by(id: params[:id]).boats.all
+    @boat = Boat.find_by(id: params[:id])
   end
 
   def edit

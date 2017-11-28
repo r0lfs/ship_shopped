@@ -1,18 +1,18 @@
 <%= render @user %>
 <% if @user.boats.count > 0 %>
-	<h3><%= @user.username %>'s Ships:</h3>
+	<h3 class="header-label card blue-grey lighten-2 z-depth-3"><%= @user.username %>'s Ships:</h3>
 	<% @user.boats.each do |boat| %>
 		<%= render boat %>
 	<% end %>
 <% else %>
-	<h3><%= @user.username %> has no ships.</h3>
+	<h3 class="header-label card blue-grey lighten-2 z-depth-3"><%= @user.username %> has no ships.</h3>
 <% end %>
 
 <% if @user.jobs.count > 0 %>
-	<h3><%= @user.username %>'s Jobs:</h3>
+	<h3 class="header-label card blue-grey lighten-2 z-depth-3"><%= @user.username %>'s Jobs:</h3>
 	<% @user.jobs.each do |job| %>
 		<%= render job %>
 	<% end %>
 <% else %>
-	<h3><%= @user.username %> has no job's.</h3>
+	<h3 class="header-label card blue-grey lighten-2 z-depth-3"><%= @user.username %> has no job's.</h3>
 <% end %>

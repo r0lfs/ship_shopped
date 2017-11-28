@@ -1,4 +1,4 @@
-<h2>Edit Account</h2>
+<h3 class="header-label card blue-grey lighten-2 z-depth-3"> Edit Account </h3>
 <div class="account">
   <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put, multipart: true }) do |f| %>
     <%= devise_error_messages! %>
@@ -62,7 +62,7 @@
     </div>
 
     <div class="actions">
-      <%= f.submit "Update", :class => "btn waves-effect waves-light blue darken-3" %>
+      <%= f.submit "Update", :class => "btn waves-effect waves-light blue-grey darken-3" %>
     </div>
   <% end %>
 
