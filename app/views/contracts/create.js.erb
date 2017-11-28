@@ -1,3 +1,3 @@
 $('.current_ships<%= @contract.job_id %>').append("<%= j render :partial => 'boats/under_contract', locals: {under_contract: @under_contract}  %>");
-$('#new-contract').trigger('reset');
 $('#new-contract').hide();
+

@@ -16,11 +16,20 @@
 		<% end %>
 	</div>
 
+
 <% else %>
 
 	<div class="jobs">
 		<% @jobs.each do |job| %>
 			<%= render job %>
+		<% end %>
+	</div>
+
+	<div class="closed-jobs">
+		<h3 class="header-label card blue-grey lighten-2 z-depth-3">Closed Jobs: </h3>
+
+		<% @closed_jobs.each do |closed_job| %>
+			<%= render :partial => 'jobs/closed_job', locals: {job: closed_job} %>
 		<% end %>
 	</div>
 

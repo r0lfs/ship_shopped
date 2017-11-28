@@ -10,3 +10,13 @@
 	width: 80%;
 	margin-top: 1%;
 }
+
+.closed-jobs{
+	.closed-job{
+		border: solid 1px red;
+		width: 80%;
+		border-size: box-sizing;
+		margin-top: 1%;
+		padding: 0 2%;
+	}
+}

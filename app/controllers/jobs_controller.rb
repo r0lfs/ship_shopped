@@ -6,7 +6,8 @@ class JobsController < ApplicationController
       @user_jobs = @user.jobs.all.reverse
     end
     @job = Job.new
-    @jobs = Job.all.reverse
+    @jobs = Job.where(open: true).all.reverse
+    @closed_jobs = Job.where(complete: true)
     @boats = current_user.boats.all
     @all_boats = Boat.all
     @contracted = Contract.all
@@ -67,6 +68,6 @@ class JobsController < ApplicationController
 
   private
   def job_params
-    params.require(:job).permit(:user_id, :origin, :destination, :description, :cost, :containers, :job_name)
+    params.require(:job).permit(:user_id, :origin, :destination, :description, :cost, :containers, :job_name, :open, :complete)
   end
 end
