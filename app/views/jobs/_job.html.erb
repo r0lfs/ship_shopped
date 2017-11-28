@@ -15,6 +15,7 @@
 			<%= job.description %>
 		</p>
 	</div>
+
 	<div class="details">
 		<ul>
 			<li><b>Contract Offer From:</b><br>
@@ -26,18 +27,28 @@
 			<li><b>Destination: </b><%= job.destination %></li>
 		</ul>
 	</div>
+
 	<div class="current_ships">
-		<b>Ships Currently Contracted for this Job: </b>
-		<ul>
-			<% @contracted.where(job_id: job.id).each do |ships| %>
-				<% if @all_boats.where(id: ships.boat_id).exists? %>
-					<li><%= @all_boats.find_by(id: ships.boat_id).ship_name %></li>
-				<% end %>
-			<% end %>
-		</ul>
+		<% if @contracted.where(job_id: job.id).exists? %>
+			<b>Ships Currently Contracted for this Job: </b>
+			<ul>
+				<% @contracted.where(job_id: job.id).all.each do |contract| %>
+					<% if @all_boats.where(id: contract.boat_id).exists? %>
+	          <li><%= @all_boats.find_by(id: contract.boat_id).ship_name %>
+	            <% if @all_boats.find_by(id: contract.boat_id).user_id == current_user.id %>
+	              <%= link_to '<i class="tiny material-icons">cancel</i>'.html_safe, contract, method: :delete %>
+	            <% end %>
+	          </li>
+	        <% end %>
+        <% end %>
+			</ul>
+		<% else %>
+			<b>There Currently no Ships Contracted for this Job</b>
+		<% end %>
 	</div>
+
 	<div class="bid">
-		<% if @boats.where(location: job.origin).exists? %>
+		<% if @boats.where(location: job.origin).exists? and @boats.where(under_contract: false).exists? %>
 			<%= render :partial => 'jobs/contract_form', locals: {job: job} %>
 		<% end %>
 	</div>
