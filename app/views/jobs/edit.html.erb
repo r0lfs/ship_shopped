@@ -1,6 +1,5 @@
-<h3>Edit Job: <br>
-	<b><%= @job.job_name %></b>
-</h3>	
+<h3 class="header-label card blue-grey lighten-2 z-depth-3">Edit: <%= @job.job_name %> </h3>
+
 <% if @job.errors.full_messages.any? %>
 	<ul>
 		<% @job.errors.full_messages.each do |error| %>

@@ -1,0 +1,9 @@
+<li>
+	<%= link_to under_contract.ship_name, boat_path(under_contract) %>
+  <% if under_contract.user_id == current_user.id %>
+    <%= link_to '<i class="tiny material-icons red-text">cancel</i>'.html_safe, contract_path(under_contract), method: :delete, :class => 'destroy_contract', remote: true %>
+  <% end %>
+  <div class="hidden">
+  	<%= under_contract.containers %>
+  </div>
+</li>

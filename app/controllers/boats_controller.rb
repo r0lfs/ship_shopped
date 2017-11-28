@@ -14,10 +14,11 @@ class BoatsController < ApplicationController
   end
 
   def create
+    @boat = Boat.new(boat_params)
     respond_to do |format|
-      @boat = Boat.new(boat_params)
       if @boat.save
         format.js 
+        format.json
         format.html {redirect_to boats_path}
       else
         format.html {render 'new'}
@@ -26,7 +27,7 @@ class BoatsController < ApplicationController
   end
 
   def show
-    @boats = User.find_by(id: params[:id]).boats.all
+    @boat = Boat.find_by(id: params[:id])
   end
 
   def edit
