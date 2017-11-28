@@ -1,0 +1,44 @@
+<div class="closed-job card blue-grey lighten-5 z-depth-3">
+
+	<div class="title">
+		<b> Title: </b> <br>
+		<%= link_to job.job_name, job_path(job) %>
+	</div>
+		
+	<div class="description">
+		<p><b>Details: </b> <br>
+			<%= job.description %>
+		</p>
+	</div>
+
+	<div class="details">
+		<ul>
+			<li><b>Contract Offer From:</b><br>
+				<%= link_to job.user.username, user_path(job.user) %>
+			</li>
+			<br>
+			<li><b>Cost: </b><%= job.cost %></li>
+			<li><b>Total Containers Required: </b><%= job.containers %></li>
+			<li><b>Origin: </b><%= job.origin %></li>
+			<li><b>Destination: </b><%= job.destination %></li>
+		</ul>
+	</div>
+
+	<div class='ships_under_contract'>
+		<% if @contracted.where(job_id: job.id).exists? %>
+		<% @contracts = @contracted.where(job_id: job.id).all %>
+			<b>Ships Currently Contracted for this Job: </b>
+			<ul class="current_ships<%= job.id %>">
+				<% @contracts.each do |contract| %>
+					<% @under_contract = Boat.find_by(id: contract.boat_id) %>
+					<%= render :partial => 'boats/under_contract', locals: {under_contract: @under_contract} %>
+				<% end %>
+			</ul>
+
+		<% end %>
+
+	</div>
+
+
+</div>
+

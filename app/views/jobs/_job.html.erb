@@ -29,22 +29,33 @@
 		</ul>
 	</div>
 
-	<div class="current_ships<%= job.id %>">
+	<div class='ships_under_contract'>
+		<% @ship_containters = 0 %>
 		<% if @contracted.where(job_id: job.id).exists? %>
 		<% @contracts = @contracted.where(job_id: job.id).all %>
 			<b>Ships Currently Contracted for this Job: </b>
-			<ul>
+			<ul class="current_ships<%= job.id %>">
 				<% @contracts.each do |contract| %>
 					<% @under_contract = Boat.find_by(id: contract.boat_id) %>
 					<%= render :partial => 'boats/under_contract', locals: {under_contract: @under_contract} %>
+					<% @ship_containters += @under_contract.containers %>
 	      <% end %>
 			</ul>
-			<div class="needed">
-				
-			</div>
 		<% else %>
 			<b>There Currently no Ships Contracted for this Job</b>
 		<% end %>
+		<div class="needed">
+			<b>Containers Still Needed: </b> <br>
+			<%= job.containers - @ship_containters %>
+			<% if (job.containers - @ship_containters) <= 0%>
+				<% @contracts.each do |contract| %>
+					<% @under_contract = Boat.find_by(id: contract.boat_id).update(under_contract: false) %>
+					<% @under_contract = Boat.find_by(id: contract.boat_id).update(location: job.destination) %>
+				<% end %>
+				<%= job.update(open: false) %>
+				<%= job.update(complete: true) %>
+			<% end %>
+		</div>
 	</div>
 
 	<div class="bid">
