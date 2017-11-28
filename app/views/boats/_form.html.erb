@@ -6,7 +6,7 @@
 	</ul>
 <% end %>
 
-<%= form_with model: @boat, url: boats_path, html: { multipart: true, remote: true }, local: true do |f| %>
+<%= form_with model: @boat, url: boats_path, remote: true, id: 'boat-form' do |f| %>
 <%= f.hidden_field :user_id, value: current_user.id %>
 	<%= f.text_field :ship_name, placeholder: 'Ship Name' %>
 	<%= f.text_field :containers, placeholder: 'Containers' %>

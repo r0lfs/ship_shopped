@@ -22,7 +22,7 @@
 				<%= link_to job.user.username, user_path(job.user) %>
 			</li>
 			<li><b>Cost: </b><%= job.cost %></li>
-			<li><b>Containers Required: </b><%= job.containers %></li>
+			<li><b>Total Containers Required: </b><%= job.containers %></li>
 			<li><b>Origin: </b><%= job.origin %></li>
 			<li><b>Destination: </b><%= job.destination %></li>
 		</ul>
@@ -36,12 +36,18 @@
 					<% if @all_boats.where(id: contract.boat_id).exists? %>
 	          <li><%= @all_boats.find_by(id: contract.boat_id).ship_name %>
 	            <% if @all_boats.find_by(id: contract.boat_id).user_id == current_user.id %>
-	              <%= link_to '<i class="tiny material-icons">cancel</i>'.html_safe, contract, method: :delete %>
+	              <%= link_to '<i class="tiny material-icons red-text">cancel</i>'.html_safe, contract, method: :delete, :class => 'destroy_contract', remote: true %>
 	            <% end %>
+	            <div class="hidden">
+	            	<%= @all_boats.find_by(id: contract.boat_id).containers %>
+	            </div>
 	          </li>
 	        <% end %>
         <% end %>
 			</ul>
+			<div class="needed">
+				
+			</div>
 		<% else %>
 			<b>There Currently no Ships Contracted for this Job</b>
 		<% end %>
@@ -55,7 +61,7 @@
 	<% if job.user.id == current_user.id %>
 		
 		<button>
-			<%= link_to "Cancel Job", job, method: :delete %>
+			<%= link_to "Cancel Job", job, method: :delete, :class => 'destroy_job', remote: true %>
 		</button>
 	<% end %>
 
