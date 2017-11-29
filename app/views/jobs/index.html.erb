@@ -10,11 +10,17 @@
 
 <% if @user %>
 		
-	<div class="jobs">
 		<% @user_jobs.each do |job| %>
-			<%= render job %>
+			<% if job.complete = false %>
+			<div class="jobs">
+				<%= render job %>
+			</div>
+			<% else %>
+			<div class="closed-jobs">
+				<%= render :partial => 'jobs/closed_job', locals: {job: job} %>
+			</div>
+			<% end %>
 		<% end %>
-	</div>
 
 
 <% else %>
