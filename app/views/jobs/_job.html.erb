@@ -30,30 +30,30 @@
 	</div>
 
 	<div class='ships_under_contract'>
-		<% @ship_containters = 0 %>
-		<% if @contracted.where(job_id: job.id).exists? %>
-		<% @contracts = @contracted.where(job_id: job.id).all %>
-			<b>Ships Currently Contracted for this Job: </b>
-			<ul class="current_ships<%= job.id %>">
+		<% @ship_containers = 0 %>
+		<b>Ships Currently Contracted for this Job: </b>
+		<ul class="current_ships<%= job.id %>">
+
+			<% if @contracted.where(job_id: job.id).exists? %>
+				<% @contracts = @contracted.where(job_id: job.id).all %>
 				<% @contracts.each do |contract| %>
 					<% @under_contract = Boat.find_by(id: contract.boat_id) %>
 					<%= render :partial => 'boats/under_contract', locals: {under_contract: @under_contract} %>
-					<% @ship_containters += @under_contract.containers %>
+					<% @ship_containers += @under_contract.containers %>
 	      <% end %>
-			</ul>
-		<% else %>
-			<b>There Currently no Ships Contracted for this Job</b>
-		<% end %>
+			<% end %>
+		</ul>
 		<div class="needed">
 			<b>Containers Still Needed: </b> <br>
-			<%= job.containers - @ship_containters %>
-			<% if (job.containers - @ship_containters) <= 0%>
+			<%= @needed = job.containers - @ship_containers %>
+			<% if (job.containers - @ship_containers) <= 0%>
 				<% @contracts.each do |contract| %>
 					<% @under_contract = Boat.find_by(id: contract.boat_id).update(under_contract: false) %>
 					<% @under_contract = Boat.find_by(id: contract.boat_id).update(location: job.destination) %>
 				<% end %>
 				<%= job.update(open: false) %>
 				<%= job.update(complete: true) %>
+				
 			<% end %>
 		</div>
 	</div>
@@ -66,7 +66,7 @@
 			<% end %>
 		<% end %>
 	</div>
-	<% if job.user.id == current_user.id %>
+	<% if job.user.id == current_user.id and job.complete = false%>
 		
 		<button>
 			<%= link_to "Cancel Job", job, method: :delete, :class => 'destroy_job', remote: true %>
