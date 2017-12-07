@@ -120,6 +120,7 @@ GEM
       cocaine (~> 0.5.5)
       mime-types
       mimemagic (~> 0.3.0)
+    pg (0.21.0)
     public_suffix (3.0.1)
     puma (3.10.0)
     rack (2.0.3)
@@ -223,6 +224,7 @@ DEPENDENCIES
   material_icons
   materialize-sass (~> 0.100.2)
   paperclip (~> 5.1.0)
+  pg
   puma (~> 3.7)
   rails (~> 5.1.4)
   restful_routing
